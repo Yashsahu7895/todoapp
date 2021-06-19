@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [kaam, setKaam] = useState(["work 1", "work 2", "work 3", "eotk 4"]);
+    //Controlled input
+    const [input, setInput] = useState("");
+
+    const addTask = () => {
+        const newKaam = kaam.slice();
+        newKaam.push(input);
+        setKaam(newKaam);
+        setInput("");
+    };
+
+    return (
+        <div>
+            <h2>ToDo List App</h2>
+            Enter New Task:
+            <input
+                type="text"
+                placeholder="new task"
+                value={input}
+                onChange={(eve) => setInput(eve.target.value)}
+            />
+            <button onClick={addTask}>Add</button>
+            <ul>
+                {kaam.map((item) => {
+                    return <li>{item}</li>;
+                })}
+            </ul>
+        </div>
+    );
+};
 
 export default App;
